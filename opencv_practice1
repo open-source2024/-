@@ -1,0 +1,35 @@
+#include <opencv2/opencv.hpp>
+
+using namespace cv;
+
+int main() {
+    // 카메라 열기
+    VideoCapture cap(0);
+
+    if (!cap.isOpened()) {
+        std::cerr << "Error: Unable to open camera." << std::endl;
+        return -1;
+    }
+
+    // 윈도우 생성
+    namedWindow("Camera Feed", WINDOW_NORMAL);
+
+    while (waitKey(1) < 0) {
+        Mat frame;
+        cap >> frame; // 카메라에서 프레임 읽기
+
+        if (frame.empty()) {
+            std::cerr << "Error: Blank frame grabbed." << std::endl;
+            break;
+        }
+
+        // 프레임 화면에 표시
+        imshow("Camera Feed", frame);
+    }
+
+    // 리소스 해제 및 윈도우 닫기
+    cap.release();
+    destroyAllWindows();
+
+    return 0;
+}
