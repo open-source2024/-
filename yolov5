@@ -1,0 +1,8 @@
+// https://public.roboflow.com/object-detection/synthetic-fruit
+// 과일 데이터 셋
+
+python train.py -img 416 --batch 2 --epochs 50 --data fruitdataset\data.yaml --cfg ./models/yolov5s.yaml --weights yolov5s.pt --name fruit_results  
+// 과일 데이터 셋 딥러닝
+
+python .\detect.py --weight .\runs\train\fruit_results\weights\best.pt --img 416 --source 0
+// 실행
